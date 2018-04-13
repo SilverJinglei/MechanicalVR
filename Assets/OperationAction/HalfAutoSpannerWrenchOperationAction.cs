@@ -9,10 +9,10 @@ public class HalfAutoSpannerWrenchOperationAction : ScrewAction
 
         if (!Parent.IsWorking) return;
 
-        var speed = attachedObj.ReverseDirection ? -1 * .01f : .01f;
-        attachedObj.transform.localPosition = new Vector3(
-            attachedObj.transform.localPosition.x,
-            attachedObj.transform.localPosition.y,
-            attachedObj.transform.localPosition.z + speed * Time.deltaTime);
+        var speed = TypedPart.ReverseDirection ? -1 * .01f : .01f;
+        TypedPart.transform.localPosition = new Vector3(
+            TypedPart.transform.localPosition.x,
+            TypedPart.transform.localPosition.y,
+            TypedPart.transform.localPosition.z + speed * Time.deltaTime);
     }
 }

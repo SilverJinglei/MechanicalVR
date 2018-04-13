@@ -12,11 +12,11 @@ public class AutoSpannerWrenchOperationAction : ScrewAction
 
         //Parent.PrimaryTool.transform.position = Parent.Part.transform.position;
 
-        var speed = attachedObj.ReverseDirection ? -1 * .01f : .01f;
-        attachedObj.transform.localPosition = new Vector3(
-            attachedObj.transform.localPosition.x,
-            attachedObj.transform.localPosition.y,
-            attachedObj.transform.localPosition.z + speed * Time.deltaTime);
+        var speed = TypedPart.ReverseDirection ? -1 * .01f : .01f;
+        TypedPart.transform.localPosition = new Vector3(
+            TypedPart.transform.localPosition.x,
+            TypedPart.transform.localPosition.y,
+            TypedPart.transform.localPosition.z + speed * Time.deltaTime);
     }
 
 
@@ -25,9 +25,11 @@ public class AutoSpannerWrenchOperationAction : ScrewAction
 
     protected virtual void InitJoint()
     {
-        sliderJoint = GetComponent<ConfigurableJoint>();
+        if (sliderJoint != null) return;
+
+        sliderJoint = Parent.PrimaryTool.GetComponent<ConfigurableJoint>();
         if (sliderJoint == null)
-            sliderJoint = gameObject.AddComponent<ConfigurableJoint>();
+            sliderJoint = Parent.PrimaryTool.gameObject.AddComponent<ConfigurableJoint>();
 
         sliderJoint.xMotion = ConfigurableJointMotion.Locked;
         sliderJoint.yMotion = ConfigurableJointMotion.Free;
@@ -43,7 +45,8 @@ public class AutoSpannerWrenchOperationAction : ScrewAction
     {
         base.StartWork();
 
-        Parent.PrimaryTool.transform.position = Parent.Part.transform.position;
+        //Parent.PrimaryTool.transform.position = Parent.Part.transform.position;
+        //Parent.PrimaryTool.GetComponent
 
         InitJoint();
 

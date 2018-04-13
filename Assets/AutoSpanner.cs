@@ -34,6 +34,8 @@ public class AutoSpanner : MonoBehaviour
 
         GetComponent<Tool>().InteractableObjectUsed += (us, ue) =>
         {
+            //InitJoint();
+
             var controller = VRTK_ControllerReference.GetControllerReference(ue.interactingObject);
             VRTK_ControllerHaptics.TriggerHapticPulse(controller, 1, 1000, .01f);
         };
@@ -43,6 +45,25 @@ public class AutoSpanner : MonoBehaviour
             var controller = VRTK_ControllerReference.GetControllerReference(ue.interactingObject);
             VRTK_ControllerHaptics.CancelHapticPulse(controller);
         };
+
+    }
+
+    ConfigurableJoint sliderJoint;
+    protected virtual void InitJoint()
+    {
+        if (sliderJoint != null) return;
+
+        sliderJoint = GetComponent<ConfigurableJoint>();
+        if (sliderJoint == null)
+            sliderJoint = gameObject.AddComponent<ConfigurableJoint>();
+
+        sliderJoint.xMotion = ConfigurableJointMotion.Locked;
+        sliderJoint.yMotion = ConfigurableJointMotion.Free;
+        sliderJoint.zMotion = ConfigurableJointMotion.Locked;
+
+        sliderJoint.angularXMotion = ConfigurableJointMotion.Locked;
+        sliderJoint.angularYMotion = ConfigurableJointMotion.Locked;
+        sliderJoint.angularZMotion = ConfigurableJointMotion.Locked;
     }
 
     float speed = 5;

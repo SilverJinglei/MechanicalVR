@@ -18,12 +18,12 @@ public class AdjustableWrenchOperationAction : ScrewAction
 {
     public override void StartWork()
     {
-        var offset = attachedObj.ReverseDirection ? -1 * .005f : .005f;
+        var offset = TypedPart.ReverseDirection ? -1 * .005f : .005f;
 
-        attachedObj.transform.localPosition = new Vector3(
-            attachedObj.transform.localPosition.x,
-            attachedObj.transform.localPosition.y,
-            attachedObj.transform.localPosition.z + offset);
+        TypedPart.transform.localPosition = new Vector3(
+            TypedPart.transform.localPosition.x,
+            TypedPart.transform.localPosition.y,
+            TypedPart.transform.localPosition.z + offset);
 
         OnFinishWork();
     }

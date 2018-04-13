@@ -194,7 +194,7 @@ public abstract class OperationActionBase : MonoBehaviour, IOperationAction
 
 public abstract class TOperationActionBase<T> : OperationActionBase
 {
-    protected T attachedObj
+    protected T TypedPart
     {
         get { return Parent.Part.gameObject.GetComponent<T>(); }
     }
